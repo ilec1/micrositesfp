@@ -1,8 +1,85 @@
 
+<style>
+    .site-nav-left>.nav>li, .site-nav-left>.nav>li>a{
+               position: inherit;
+           }
+           .site-nav .nav li a.dropdown-item {
+            color: white;
+           }
+            a.dropdown-toggle.active{
+                background: #9f2148;
+                color: white;
+            }
+           .site-nav .nav li .dropdown-menu-large{
+            background: #9f2148;
+            margin-top:0;
+            border-top: 0;
+            border-radius: 0;
+            width: 100%;
+            -webkit-transition: all .3s ease .15s;
+            -moz-transition: all .3s ease .15s;
+            -o-transition: all .3s ease .15s;
+            -ms-transition: all .3s ease .15s;
+            transition: all .3s ease .15s;
+            column-count: 2;
+            
+           }
+          
+           .site-nav .nav .open>a, .site-nav .nav .open>a:focus, .site-nav .nav .open>a:hover {
+                background: #9f2148;
+                color: white;
+            }
+           
+</style>
 <ul class="nav" role="menu" id="navbarMain">
     <!-- Loop through the navigation items -->
     {{#foreach navigation}}
-    <li class="nav-{{slug}}{{#if current}} nav-current{{/if}}"><a href="{{url absolute="true"}}">{{label}}</a></li>
+    
+    <li role="menuitem" class="{{#unless @first}}dropdown dropdown-large{{/unless}} nav-{{slug}}{{#if current}} nav-current{{/if}}">
+        <a href="{{url absolute="true"}}" {{#unless @first}}class="dropdown-toggle" id="navbarDropdown-{{slug}}"{{/unless}}>{{label}}</a>
+        {{#unless @first}}
+        <div class="dropdown-menu dropdown-menu-large" aria-labelledby="navbarDropdown-{{slug}}">
+            {{#get "pages" filter="page:true+slug:{{slug}}"}}
+                {{#foreach pages}}
+                <div class="hidden post-content-hidden">{{content}}</div>
+                {{/foreach}}
+            {{/get}} 
+        </div>
+        {{/unless}}
+    </li>
     {{/foreach}}
     <!-- End the loop -->
 </ul>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+
+<script>
+
+    $(document).ready(function () {
+        $li=$(".nav li.dropdown");
+        
+        $li.each(function(){
+            $slug_li=$(this).find("a.dropdown-toggle").attr('href');
+            $dropdown= $(this).find(".dropdown-menu");
+            $postcontent=$(this).find(".post-content-hidden");
+            
+            if($postcontent.length > 0)
+            {
+                console.log($postcontent.html());
+                $postcontent.find("h2").each(function (index, el) {
+                $("<a class='dropdown-item' href='"+ $slug_li + "#"+el.id + "'>" + el.innerHTML + "</a>").appendTo($dropdown);
+                });
+            }
+            $postcontent.remove();
+        });
+        $(".dropdown").hover(function(){
+            //$(this).find(".dropdown-toggle").toggleClass("active");
+            $as=$(this).find("a.dropdown-item");
+            if($as.length > 0)
+            $(this).find(".dropdown-menu").toggle();
+        });
+        
+    });
+</script>

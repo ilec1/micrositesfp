@@ -67,7 +67,7 @@ PAGE
 <main id="site-main" class="site-main">
     <div class="inner">
         <aside class="menu-lateral" id="menu-lateral">
-          
+          <a href="#normatividad">fjdgnkfdng</a>
         {{!-- {{#get "pages" filter="page:true+tags:{{primary_tag.slug}}" order="id asc"}}
             {{#foreach pages}}
             <a href="{{url}}">{{title}}</a>
@@ -110,15 +110,19 @@ PAGE
 {{!-- The #contentFor helper here will send everything inside it up to the matching #block helper found in default.hbs --}}
 {{#contentFor "scripts"}}
 <script>
-    $(function () {
+    $(document).ready(function () {
         var $postContent = $(".post-full-content");
         $postContent.fitVids();
         $postContent.find("h2").each(function (index, el) {
             $("<a href='#" + el.id + "'>" + el.innerHTML + "</a>").appendTo(".menu-lateral");
+        });   
+        $(".menu-lateral a").click(function(){
+            var id=$(this).attr('href');
+            $('html,body').animate({scrollTop: $("h2"+id).offset().top},'slow');    
         });
         
-    
-       
     });
+    
+
 </script>
 {{/contentFor}}
