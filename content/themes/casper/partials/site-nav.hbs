@@ -1,0 +1,159 @@
+<header class="top-header">
+    <style>
+        .navbar {
+            height: 45px !important;
+        }
+
+        li {
+            margin: 0;
+        }
+
+        .site-nav.fixed-top {
+            position: fixed;
+            top: 45px;
+            left: 0;
+            z-index: 10000;
+        }
+
+        .site-nav-logo.fixed-top {
+            position: fixed;
+            top: 45px;
+            z-index: 20000;
+            overflow: hidden;
+            height: 45px;
+        }
+
+        #navbarMainCollapse {
+            background: #eaeaea;
+        }
+
+        #navbarMainCollapse li {
+            margin: 0;
+            padding-left: 0;
+            line-height: 1;
+        }
+
+        #navbarMainCollapse {
+            background: #eaeaea;
+        }
+
+        #navbarMainCollapse li {
+            margin: 0;
+            padding-left: 0;
+            line-height: 1;
+        }
+
+        .site-name .navbar-toggle {
+            margin-right: 0;
+        }
+
+        .glyphicon-menu-hamburger {
+            font-size: 24px;
+            color: #fff;
+        }
+
+        @media (max-width:768px) {
+
+            .site-nav-left,
+            #navbarMain {
+                display: block;
+            }
+
+            .site-name {
+                height: 56px;
+            }
+             .collapse {
+            display: none;
+        }
+
+        .collapse.in {
+            display: block;
+        }
+        }
+
+        .site-nav.long {
+            min-height: 225px;
+        }
+
+       
+    </style>
+    <div class="navbar navbar-inverse navbar-fixed-top navbar">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-target="#navbarMainCollapse"
+                    data-toggle="collapse">
+                    <span class="sr-only">Interruptor de Navegación</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a href="https://www.gob.mx/" class="navbar-brand" title="Ir a la página inicial"><img alt="gob.mx"
+                        src="https://framework-gb.cdn.gob.mx/assets/images/gobmxlogo-2.svg"></a>
+            </div>
+            <div id="navbarMainCollapse" class="collapse navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="https://www.gob.mx/tramites" class="" title="Trámites">Trámites</a></li>
+                    <li><a href="https://www.gob.mx/gobierno" class="" title="Gobierno">Gobierno</a></li>
+                    <li><a href="https://www.gob.mx/participa" title="Participación Ciudadana">Participa</a></li>
+                    <li><a href="http://datos.gob.mx" title="Datos abiertos">Datos</a></li>
+                    <li>
+                        <form accept-charset="UTF-8" action="/busqueda" method="get"><input name="utf8" type="hidden"
+                                value="✓">
+                            <button id="goSearch" type="submit" class="btn" title="buscar" value="buscar"
+                                style="background-color: transparent;"
+                                onmouseleave="this,style.background='#transparent'"
+                                onmouseover="this.style.background='F6F6F6'" onfocus="this.style.background='black'">
+                                <img alt="Búsqueda" width="20" height="20" class="optical-adjust-search"
+                                    src="https://framework-gb.cdn.gob.mx/assets/search-dark.svg">
+                            </button>
+                        </form>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="site-name container">
+
+        <!-- <a class="site-nav-logo" href="#"><img src="{{@site.logo}}" alt="{{@site.title}}" /></a> -->
+        <a class="site-nav-logo" href="{{@site.url}}"><img src="{{@site.logo}}" alt="{{@site.title}}" /></a>
+        <h1 class="hidden-xs">{{@site.title}}</h1>
+        <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbarMain">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="glyphicon glyphicon-menu-hamburger"></span>
+        </button>
+    </div>
+    <nav class="site-nav collapse">
+        <div class="site-nav-left">
+            {{#if @site.navigation}}
+            {{navigation}}
+            {{/if}}
+
+
+        </div>
+
+    </nav>
+</header>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+
+<script>
+
+    $(document).ready(function () {
+        var navbar = $(".site-nav").offset().top;
+
+        $(window).scroll(function (event) {
+            if ($(window).scrollTop() >= navbar)
+                $(".site-nav,.site-nav-logo").addClass("fixed-top")
+            else
+                $(".site-nav, .site-nav-logo").removeClass("fixed-top");
+        });
+        $('#navbarMain').on('show.bs.collapse', function () {
+        $(".site-nav").addClass("long in");
+    });
+    $('#navbarMain').on('hide.bs.collapse', function () {
+        $(".site-nav").removeClass("long in");
+
+    });
+    });
+</script>

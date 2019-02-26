@@ -1,0 +1,25 @@
+{{!< default}}
+{{!-- The tag above means - insert everything in this file into the {body} of the default.hbs template --}}
+{{> "site-nav"}}
+
+<style>
+    .inner,
+    .post-feed {
+        padding: 0;
+    }
+</style>
+PROYECTOS
+
+{{!-- The main content area --}}
+<main id="site-main" class="site-main outer">
+    <div class="inner">
+        <div class="post-feed proyectos">
+            {{#get "posts" filter="tags:proyectos" order="published_at desc"}}
+            {{#foreach posts}}
+            {{!-- The tag below includes the markup for each post - partials/proyecto.hbs --}}
+            {{> "proyecto"}}
+            {{/foreach}}
+            {{/get}}
+        </div>
+    </div>
+</main>

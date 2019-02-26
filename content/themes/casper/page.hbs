@@ -1,0 +1,114 @@
+{{!< default}}
+{{!-- The tag above means: insert everything in this file
+into the {body} of the default.hbs template --}}
+
+{{!-- The big featured header, it uses blog cover image as a BG if available --}}
+{{!-- <header class="site-header outer">
+    <div class="inner">
+        {{> "site-nav"}}
+    </div>
+</header> --}}
+
+<style>
+    .post-full {
+        margin-left: 30%;
+        width: 70%;
+    }
+
+    .menu-lateral {
+        width: 20%;
+        position: fixed;
+        z-index: 100000;
+        -webkit-transition: all ease 2s;
+        transition: all ease 2s;
+    }
+
+    .menu-lateral a:active {
+        font-weight: bold;
+    }
+
+    .menu-lateral.not-sticky {
+        position: relative;
+    }
+
+    .post-full-image {
+        margin: 10px 0;
+        border-radius: 0;
+    }
+
+    .post-full-image img {
+        height: 200px;
+    }
+
+    body {
+        position: relative;
+    }
+</style>
+{{> "site-nav"}}
+{{!-- Everything inside the #post tags pulls data from the post --}}
+PAGE
+{{#post}}
+
+<main id="site-main" class="site-main">
+    <div class="inner">
+        <aside class="menu-lateral" id="menu-lateral">
+        {{#get "posts" filter="page:true+tags:nav-{{slug}}"}}
+        {{#foreach posts}}
+        <p>{{title}} </p>
+    {{/foreach}}
+    
+        {{/get}}
+        </aside>
+        <article class="post-full {{post_class}} {{#unless feature_image}}no-image{{/unless}}" data-spy="scroll"
+            data-target="#menu-lateral" data-offset="0">
+            {{#if feature_image}}
+            <figure class="post-full-image">
+                {{!-- This is a responsive image, it loads different sizes depending on device
+                https://medium.freecodecamp.org/a-guide-to-responsive-images-with-ready-to-use-templates-c400bd65c433 --}}
+                <img srcset="{{img_url feature_image size="s"}} 300w,
+                            {{img_url feature_image size="m"}} 600w,
+                            {{img_url feature_image size="l"}} 1000w,
+                            {{img_url feature_image size="xl"}} 2000w" sizes="(max-width: 800px) 400px,
+                            (max-width: 1170px) 700px,
+                            1400px" src="{{img_url feature_image size="xl"}}" alt="{{title}}" />
+            </figure>
+            {{/if}}
+            <header class="post-full-header">
+                <h1 class="post-full-title">{{title}}</h1>
+            </header>
+
+            <section class="post-full-content">
+                <div class="post-content">
+                    {{content}}
+                </div>
+            </section>
+
+        </article>
+
+
+    </div>
+</main>
+
+{{/post}}
+
+{{!-- The #contentFor helper here will send everything inside it up to the matching #block helper found in default.hbs --}}
+{{#contentFor "scripts"}}
+<script>
+    $(function () {
+        var $postContent = $(".post-full-content");
+        $postContent.fitVids();
+        /*$postContent.find("h2").each(function (index, el) {
+            $("<a href='#" + el.id + "'><h3>" + el.innerHTML + "</h3></a>").appendTo(".menu-lateral");
+        });
+        //$('body').scrollspy({ target: '#menu-lateral' })
+        var footer = $(".site-footer").offset().top;
+        $(window).scroll(function (event) {
+            if ($(window).scrollTop() >= footer - 500)
+                $(".menu-lateral").addClass("not-sticky");
+            else
+                $(".menu-lateral").removeClass("not-sticky");
+        });*/
+       
+    });
+</script>
+{{/contentFor}}
