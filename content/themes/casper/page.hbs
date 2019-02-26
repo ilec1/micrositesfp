@@ -11,16 +11,19 @@ into the {body} of the default.hbs template --}}
 
 <style>
     .post-full {
-        margin-left: 30%;
+        margin-left: 25%;
         width: 70%;
     }
-
+.post-content p{
+    text-align: justify;
+}
     .menu-lateral {
         width: 20%;
-        position: fixed;
+        /*!-- position: fixed;*/
+        float:left;
         z-index: 100000;
-        -webkit-transition: all ease 2s;
-        transition: all ease 2s;
+        -webkit-transition: ease 1s;
+        transition: ease 1s;
     }
 
     .menu-lateral a:active {
@@ -43,6 +46,15 @@ into the {body} of the default.hbs template --}}
     body {
         position: relative;
     }
+    .menu-lateral a{
+        display: block;
+        font-weight: bold;
+        margin: 15px 0;
+    }
+    .menu-lateral a.current{
+        border-left: solid red 5px;
+        
+    }
 </style>
 {{> "site-nav"}}
 {{!-- Everything inside the #post tags pulls data from the post --}}
@@ -52,11 +64,13 @@ PAGE
 <main id="site-main" class="site-main">
     <div class="inner">
         <aside class="menu-lateral" id="menu-lateral">
-        {{#get "posts" filter="page:true+tags:nav-{{slug}}"}}
-        {{#foreach posts}}
-        <p>{{title}} </p>
-    {{/foreach}}
+            <i id="url" class="hidden">{{url}}</i>
+        {{#get "pages" filter="page:true+tags:{{primary_tag.slug}}" order="id asc"}}
+            {{#foreach pages}}
+            <a href="{{url}}">{{title}}</a>
+            {{/foreach}}
         {{/get}}
+      
         </aside>
         <article class="post-full {{post_class}} {{#unless feature_image}}no-image{{/unless}}" data-spy="scroll"
             data-target="#menu-lateral" data-offset="0">
@@ -98,15 +112,19 @@ PAGE
         $postContent.fitVids();
         /*$postContent.find("h2").each(function (index, el) {
             $("<a href='#" + el.id + "'><h3>" + el.innerHTML + "</h3></a>").appendTo(".menu-lateral");
-        });
+        });*/
         //$('body').scrollspy({ target: '#menu-lateral' })
         var footer = $(".site-footer").offset().top;
-        $(window).scroll(function (event) {
-            if ($(window).scrollTop() >= footer - 500)
+         $(window).scroll(function (event) {
+             console.log(footer);
+             console.log($(window).scrollTop())
+            if ($(window).scrollTop() >= footer - 300)
                 $(".menu-lateral").addClass("not-sticky");
             else
                 $(".menu-lateral").removeClass("not-sticky");
-        });*/
+       
+        });
+        
        
     });
 </script>

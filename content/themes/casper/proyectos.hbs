@@ -14,8 +14,8 @@ PROYECTOS
 <main id="site-main" class="site-main outer">
     <div class="inner">
         <div class="post-feed proyectos">
-            {{#get "posts" filter="tags:proyectos" order="published_at desc"}}
-            {{#foreach posts}}
+            {{#get "pages" filter="page:true+tags:proyectos" order="published_at desc"}}
+            {{#foreach pages}}
             {{!-- The tag below includes the markup for each post - partials/proyecto.hbs --}}
             {{> "proyecto"}}
             {{/foreach}}
