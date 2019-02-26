@@ -5,9 +5,13 @@
     "host": "127.0.0.1"
   },
   "database": {
-    "client": "sqlite3",
+    "client": "mysql",
     "connection": {
-      "filename": "E:\\Mis Documentos\\SFP\\Microsite\\content\\data\\ghost-local.db"
+      "host": "35.227.180.39",
+      "user": "root",
+      "password": "hZm3rjTMuaeU8PZ",
+      "database": "ghost_transparencia",
+      "charset": "utf8"
     }
   },
   "mail": {

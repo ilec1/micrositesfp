@@ -206,7 +206,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    overflow-y: hidden;
+    /* overflow-y: hidden; */
     height: 40px;
     font-size: 1.8rem;
     width: 100%;
@@ -218,8 +218,8 @@ body {
 .site-nav-left {
     display: flex;
     align-items: center;
-    overflow-x: auto;
-    overflow-y: hidden;
+    /* overflow-x: auto;
+    overflow-y: hidden; */
     -webkit-overflow-scrolling: touch;
     white-space: nowrap;
     -ms-overflow-scrolling: touch;

@@ -4,51 +4,72 @@
     <link href="https://framework-gb.cdn.gob.mx/assets/styles/main.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700|Roboto:400,700" rel="stylesheet">
     <link href="E:\Mis Documentos\SFP\Microsite\content\themes\casper\assets\css\screen.css" rel="stylesheet">
+
+    <style>
+            .navbar{
+                height: 45px !important;
+            }
+            #navbarMainCollapse{
+                background: #eaeaea;
+            }
+            #navbarMainCollapse li {
+                margin: 0; 
+                padding-left: 0;
+                line-height: 1; 
+            }
+            .site-name .navbar-toggle{
+                margin-right: 0;
+            }
+            .glyphicon-menu-hamburger{
+                font-size: 24px;
+                color: #fff;
+            }
+            @media (max-width:768px) {
+                .site-nav-left, #navbarMain{
+                    display: block;
+                }
+                .site-name {
+                    height: 56px;
+                }
+                .collapse {
+                display: none;
+            }
+            .collapse.in{
+                display: block;
+            }
+            }
+            .site-nav.long{
+                min-height: 225px;
+            }
+           .dropdown-menu-large{
+               width: 100%;
+           }
+           .site-nav-left>.nav>li, .site-nav-left>.nav>li>a{
+               position: inherit;
+           }
+           .site-nav .nav li a.dropdown-item {
+            color: white;
+           }
+           .site-nav .nav li .dropdown-menu-large{
+            background: #9f2148;
+            margin-top:0;
+            border-top: none;
+            border-radius: none;
+            column-count: 3;
+            column-gap: 10px;
+            column-width: 30%;
+           }
+           .site-nav .nav .open>a, .site-nav .nav .open>a:focus, .site-nav .nav .open>a:hover{
+            background: #9f2148;
+            color: white;
+           }
+        
+    </style>
 </head>
 
 
 <header class="top-header">
-    <style>
-        .navbar{
-            height: 45px !important;
-        }
-        #navbarMainCollapse{
-            background: #eaeaea;
-        }
-        #navbarMainCollapse li {
-            margin: 0; 
-            padding-left: 0;
-            line-height: 1; 
-        }
-        .site-name .navbar-toggle{
-            margin-right: 0;
-        }
-        .glyphicon-menu-hamburger{
-            font-size: 24px;
-            color: #fff;
-        }
-        @media (max-width:768px) {
-            .site-nav-left, #navbarMain{
-                display: block;
-            }
-            .site-name {
-                height: 56px;
-            }
-        }
-        .site-nav.long{
-            min-height: 225px;
-        }
-       
-        .collapse {
-            display: none;
-        }
-        .collapse.in{
-            display: block;
-        }
-        
-        
-    
-</style>
+   
     <div class="navbar navbar-inverse navbar-fixed-top navbar">
         <div class="container">
             <div class="navbar-header">
@@ -95,7 +116,15 @@
         <div class="site-nav-left">
             <ul class="nav" role="menu" id="navbarMain">
                 <li class="nav-current" role="menuitem"><a href="http://localhost:2368/">Inicio</a></li>
-                <li role="menuitem"><a href="http://localhost:2368/tag/getting-started/">SFP</a></li>
+                <li role="menuitem" class="dropdown dropdown-large">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="http://localhost:2368/tag/getting-started/" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">SFP</a>
+                    <div class="dropdown-menu dropdown-menu-large" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="#">Action</a>
+                            <a class="dropdown-item" href="#">Another action</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">Something else here</a>
+                          </div>
+                </li>
                 <li role="menuitem"><a href="http://localhost:2368/author/ghost/">Dirección general de transparencia</a></li>
                 <li role="menuitem"><a href="https://docs.ghost.org">Comité de Transaprencia</a></li>
                 <li role="menuitem"><a href="https://docs.ghost.org">Actividades</a></li>
@@ -104,6 +133,7 @@
 
     </nav>
 </header>
+<div  style="min-height:3000px"></div>
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script src="https://framework-gb.cdn.gob.mx/gobmx.js"></script>
 <script>
