@@ -1,0 +1,5 @@
+node_modules/
+current/
+versions/
+.ghost-cli
+.ghostpid
