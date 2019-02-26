@@ -7,12 +7,27 @@
     .post-feed {
         padding: 0;
     }
+    .inner{
+        position: relative;
+    }
+    h1.heading{
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        z-index: 5000000;
+        font-size: 2rem;
+        color: white;
+        font-weight: bold;
+    }
+    
+    
 </style>
 PROYECTOS
 
 {{!-- The main content area --}}
 <main id="site-main" class="site-main outer">
     <div class="inner">
+        <h1 class="heading">Los 25 proyectos</h1>
         <div class="post-feed proyectos">
             {{#get "pages" filter="page:true+tags:proyectos" order="published_at desc"}}
             {{#foreach pages}}
