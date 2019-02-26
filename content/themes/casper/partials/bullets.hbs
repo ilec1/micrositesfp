@@ -20,8 +20,8 @@
 <div id="bullets-home" class="bullets container-fluid">
 
 
-  {{#get "posts" limit="3" include="tags" filter="tags:bullet-home" order="published_at desc"}}
-  {{#foreach posts}}
+  {{#get "pages" limit="3" include="tags" filter="page:true+tags:bullet-home" order="published_at desc"}}
+  {{#foreach pages}}
   <div class="item-bullet">
     <div class="gh-iconset-icon">
       {{#if featured-image}}
