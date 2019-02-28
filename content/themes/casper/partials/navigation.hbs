@@ -4,12 +4,11 @@
                position: inherit;
            }
            .site-nav .nav li a.dropdown-item {
-            color: white;
-           }
-            a.dropdown-toggle.active{
-                background: #9f2148;
                 color: white;
-            }
+           }           
+           .site-nav .nav li a.dropdown-item:hover {
+                color: #3c484e;
+           }           
            .site-nav .nav li .dropdown-menu-large{
             background: #9f2148;
             margin-top:0;
@@ -21,11 +20,14 @@
             -o-transition: all .3s ease .15s;
             -ms-transition: all .3s ease .15s;
             transition: all .3s ease .15s;
-            column-count: 2;
+            
             
            }
-          
            .site-nav .nav .open>a, .site-nav .nav .open>a:focus, .site-nav .nav .open>a:hover {
+                background: #9f2148;
+                color: white;
+            }
+            .site-nav .nav li.nav-current a.active, .dropdown-toggle.active{
                 background: #9f2148;
                 color: white;
             }
@@ -50,36 +52,47 @@
     {{/foreach}}
     <!-- End the loop -->
 </ul>
-
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-    crossorigin="anonymous"></script>
-
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+{{#contentFor "scripts"}}
 <script>
 
     $(document).ready(function () {
-        $li=$(".nav li.dropdown");
-        
+        var $li=$(".nav li.dropdown");
         $li.each(function(){
-            $slug_li=$(this).find("a.dropdown-toggle").attr('href');
-            $dropdown= $(this).find(".dropdown-menu");
-            $postcontent=$(this).find(".post-content-hidden");
-            
+            var $slug_li=$(this).find("a.dropdown-toggle").attr('href');
+            var $dropdown= $(this).find(".dropdown-menu");
+            var $postcontent=$(this).find(".post-content-hidden");     
+            console.log($(this));
             if($postcontent.length > 0)
             {
-                console.log($postcontent.html());
+                var $i =0, $col=0;
+                $dropdown.append("<div class='col-lg-3' id='col"+$col+"'></div>");
                 $postcontent.find("h2").each(function (index, el) {
-                $("<a class='dropdown-item' href='"+ $slug_li + "#"+el.id + "'>" + el.innerHTML + "</a>").appendTo($dropdown);
+                    console.log('i:'+$i+'col:'+$col);
+                    $("<a class='dropdown-item' href='"+ $slug_li + "#"+el.id + "'>" + el.innerHTML + "</a>").appendTo($dropdown.find("#col"+$col));
+                    if($i%2==0 && $i!=0)
+                    {
+                        $col++;$i=-1;
+                        console.log('ntre ig');
+                        $dropdown.append("<div class='col-lg-3' id='col"+$col+"'></div>");                
+                        
+                    }
+                    $i++;   
                 });
+               
             }
             $postcontent.remove();
         });
         $(".dropdown").hover(function(){
-            //$(this).find(".dropdown-toggle").toggleClass("active");
+            $(this).find(".dropdown-toggle").addClass("active");
             $as=$(this).find("a.dropdown-item");
             if($as.length > 0)
-            $(this).find(".dropdown-menu").toggle();
+                $(this).find(".dropdown-menu").show();
+        },function(){
+            $(this).find(".dropdown-toggle").removeClass("active");
+            $(this).find(".dropdown-menu").hide();
         });
         
     });
 </script>
+{{/contentFor}}

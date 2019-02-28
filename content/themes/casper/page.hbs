@@ -14,19 +14,20 @@ into the {body} of the default.hbs template --}}
         margin-left: 25%;
         width: 70%;
     }
-.post-content p{
-    text-align: justify;
-}
-.post-full-content h2:not(:first-child){
-    padding-top: 140px;
-}
+    .post-content p{
+        text-align: justify;
+    }
+    .post-full-content h2:not(:first-child){
+        padding-top: 140px;
+    }
     .menu-lateral {
         width: 20%;
-        /*!-- position: fixed;*/
+        position: fixed;
         float:left;
         z-index: 100000;
         -webkit-transition: ease 1s;
         transition: ease 1s;
+        display: block;
     }
 
     .menu-lateral a:active {
@@ -41,14 +42,13 @@ into the {body} of the default.hbs template --}}
         margin: 10px 0;
         border-radius: 0;
     }
-
+body{
+    position: relative;
+}
     .post-full-image img {
         height: 200px;
     }
 
-    body {
-        position: relative;
-    }
     .menu-lateral a{
         display: block;
         font-weight: bold;
@@ -72,10 +72,11 @@ PAGE
             <a href="{{url}}">{{title}}</a>
             {{/foreach}}
         {{/get}} --}}
-      
+        {{!-- {{#has slug="sfp"}}
+        <a href="{{@site.url}}/directorio">Directorio</a>
+        {{/has}} --}}
         </aside>
-        <article class="post-full {{post_class}} {{#unless feature_image}}no-image{{/unless}}" data-spy="scroll"
-            data-target="#menu-lateral" data-offset="0">
+        <article class="post-full {{post_class}} {{#unless feature_image}}no-image{{/unless}}">
             {{#if feature_image}}
             <figure class="post-full-image">
                 {{!-- This is a responsive image, it loads different sizes depending on device
@@ -105,7 +106,7 @@ PAGE
 </main>
 
 {{/post}}
-
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 {{!-- The #contentFor helper here will send everything inside it up to the matching #block helper found in default.hbs --}}
 {{#contentFor "scripts"}}
 <script>
@@ -115,13 +116,18 @@ PAGE
         $postContent.find("h2").each(function (index, el) {
             $("<a href='#" + el.id + "'>" + el.innerHTML + "</a>").appendTo(".menu-lateral");
         });   
-        $(".menu-lateral a").click(function(){
+        /*$(".menu-lateral a").click(function(){
             var id=$(this).attr('href');
             $('html,body').animate({scrollTop: $("h2"+id).offset().top},'slow');    
+        });*/
+        var footer = $("footer").offset().top;
+        $(window).scroll(function (event) {
+            if ($(window).scrollTop() >= footer-500)
+                $(".menu-lateral").hide('slow');
+            else
+                $(".menu-lateral").show('slow');
         });
-        
+        $('body').scrollspy({ target: '#menu-lateral' })
     });
-    
-
 </script>
 {{/contentFor}}
