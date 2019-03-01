@@ -12,7 +12,7 @@ into the {body} of the default.hbs template --}}
 <style>
     .post-full {
         margin-left: 25%;
-        width: 70%;
+        width: 75%;
     }
     .post-content p{
         text-align: justify;
@@ -20,7 +20,7 @@ into the {body} of the default.hbs template --}}
     .post-full-content h2:not(:first-child){
         padding-top: 140px;
     }
-    .menu-lateral {
+    .left-side-bar {
         width: 20%;
         position: fixed;
         float:left;
@@ -30,11 +30,11 @@ into the {body} of the default.hbs template --}}
         display: block;
     }
 
-    .menu-lateral a:active {
+    .left-side-bar a:active {
         font-weight: bold;
     }
 
-    .menu-lateral.not-sticky {
+    .left-side-bar.not-sticky {
         position: relative;
     }
 
@@ -42,21 +42,30 @@ into the {body} of the default.hbs template --}}
         margin: 10px 0;
         border-radius: 0;
     }
-body{
-    position: relative;
-}
-    .post-full-image img {
-        height: 200px;
+    body{
+        position: relative;
     }
-
-    .menu-lateral a{
+    
+    .left-side-bar a{
         display: block;
         font-weight: bold;
         margin: 15px 0;
     }
-    .menu-lateral a.current{
+    .left-side-bar a.current{
         border-left: solid #9d2449 5px;
         padding-left: 10px;
+    }
+    @media (max-width: 767px) {
+        .post-full{
+            width: 100%;
+            margin: 0 auto;
+        }
+        .left-side-bar{
+            display: none !important;
+        }
+        .post-full-content h2:not(:first-child){
+            padding-top: 0;
+        }
     }
 </style>
 {{> "site-nav"}}
@@ -66,12 +75,12 @@ PAGE
 
 <main id="site-main" class="site-main">
     <div class="inner">
-        <aside class="menu-lateral" id="menu-lateral">
-        {{!-- {{#get "pages" filter="page:true+tags:{{primary_tag.slug}}" order="id asc"}}
+        <aside class="left-side-bar" id="left-side-bar">
+        {{#get "pages" filter="page:true+tags:{{primary_tag.slug}}" order="id asc"}}
             {{#foreach pages}}
-            <a href="{{url}}">{{title}}</a>
+            <a href="{{url}}" {{#has slug="{{post.slug}}"}}{{/has}}>{{title}}</a>
             {{/foreach}}
-        {{/get}} --}}
+        {{/get}}
         {{!-- {{#has slug="sfp"}}
         <a href="{{@site.url}}/directorio">Directorio</a>
         {{/has}} --}}
@@ -89,11 +98,10 @@ PAGE
                             1400px" src="{{img_url feature_image size="xl"}}" alt="{{title}}" />
             </figure>
             {{/if}}
-            <header class="post-full-header">
-                <h1 class="post-full-title text-left">{{title}}</h1>
-            </header>
-
-            <section class="post-full-content">
+            <section class="post-full-content"> 
+                <header class="post-full-header">
+                    <h1 class="post-full-title text-left">{{title}}</h1>
+                </header>
                 <div class="post-content">
                     {{content}}
                 </div>
@@ -113,21 +121,33 @@ PAGE
     $(document).ready(function () {
         var $postContent = $(".post-full-content");
         $postContent.fitVids();
-        $postContent.find("h2").each(function (index, el) {
-            $("<a href='#" + el.id + "'>" + el.innerHTML + "</a>").appendTo(".menu-lateral");
-        });   
-        /*$(".menu-lateral a").click(function(){
+        if($(".left-side-bar").find("a").length==0){
+            $(".left-side-bar").hide();
+        }
+        else{
+            var url= window.location.href; 
+            var url_split=url.split('/');
+            console.log($(".left-side-bar").find('a[href="'+url_split[url_split.length-2]+'"]'));
+        }
+        /*    $postContent.find("h2").each(function (index, el) {
+                $("<a href='#" + el.id + "'>" + el.innerHTML + "</a>").appendTo(".left-side-bar");
+            });  
+            var footer = $("footer").offset().top;
+            $(window).scroll(function (event) {
+                if ($(window).scrollTop() >= footer-500)
+                    $(".left-side-bar").hide('slow');
+                else
+                    $(".left-side-bar").show('slow');
+            });
+            $('body').scrollspy({ target: '#left-side-bar' })
+        }
+         
+        /*$(".left-side-bar a").click(function(){
             var id=$(this).attr('href');
             $('html,body').animate({scrollTop: $("h2"+id).offset().top},'slow');    
         });*/
-        var footer = $("footer").offset().top;
-        $(window).scroll(function (event) {
-            if ($(window).scrollTop() >= footer-500)
-                $(".menu-lateral").hide('slow');
-            else
-                $(".menu-lateral").show('slow');
-        });
-        $('body').scrollspy({ target: '#menu-lateral' })
+       
+        
     });
 </script>
 {{/contentFor}}

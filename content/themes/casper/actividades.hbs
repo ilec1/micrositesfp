@@ -3,32 +3,20 @@
 {{> "site-nav"}}
 
 <style>
-    .inner,
-    .post-feed {
-        padding: 0;
-    }
     .inner{
-        position: relative;
+        padding-top: 20px;
     }
-    h1.heading{
-        position: absolute;
-        top: 20px;
-        left: 20px;
-        z-index: 5000000;
-        font-size: 2rem;
-        color: white;
-        font-weight: bold;
-    }
+ 
+  
     
     
 </style>
-Actividades
 
 {{!-- The main content area --}}
 <main id="site-main" class="site-main outer">
     <div class="inner">
-        <h1 class="heading">Los 25 proyectos</h1>
-        <div class="post-feed proyectos">
+        <h1 class="heading">Actividades</h1>
+        <div class="post-feed actividades">
             {{#get "posts" filter="tags:[noticias, comunicados,actividades]" order="published_at desc"}}
             {{#foreach posts}}
             {{> "post-card"}}

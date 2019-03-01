@@ -5,7 +5,7 @@
     .post-card-large .post-card-content{
         flex: inherit;
     }
-    .post-card-content .post-card-content-link{
+    .post-card-large .post-card-content .post-card-content-link{
         display: flex;
     flex-direction: column;
     justify-content: flex-end;
@@ -13,9 +13,10 @@
     .post-card-content p{
         color: #fff;
     }
-    .post-card-title{
+    .yellow{
         color: #cf913e;
     }
+   
     
 </style>
 <article
@@ -66,3 +67,16 @@
     </div>{{!--/.post-card-content--}}
 
 </article>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+{{!-- The #contentFor helper here will send everything inside it up to the matching #block helper found in default.hbs --}}
+{{#contentFor "scripts"}}
+<script>
+     $(document).ready(function () {
+            $(".post-card-title").html(function(){
+            var text= $(this).text().trim().split(" ");
+            var first = text.shift();
+            return (text.length > 0 ? "<span class='yellow'>"+ first + "</span> " : first) + text.join(" ");
+            });
+        });
+</script>
+{{/contentFor}}

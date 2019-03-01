@@ -31,7 +31,24 @@
                 background: #9f2148;
                 color: white;
             }
-           
+            .flexed{
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+                flex-wrap: wrap;
+                height: 150px;
+            }
+            .flexed a.dropdown-item{
+                flex: 1 1 30%;
+            }
+            .nav-inicio a{
+                font-size: 16px;
+            }
+            @media (max-width: 767px) {
+                .dropdown-menu {
+                    display: none;
+                }
+            }
 </style>
 <ul class="nav" role="menu" id="navbarMain">
     <!-- Loop through the navigation items -->
@@ -41,11 +58,14 @@
         <a href="{{url absolute="true"}}" {{#unless @first}}class="dropdown-toggle" id="navbarDropdown-{{slug}}"{{/unless}}>{{label}}</a>
         {{#unless @first}}
         <div class="dropdown-menu dropdown-menu-large" aria-labelledby="navbarDropdown-{{slug}}">
-            {{#get "pages" filter="page:true+slug:{{slug}}"}}
-                {{#foreach pages}}
-                <div class="hidden post-content-hidden">{{content}}</div>
-                {{/foreach}}
-            {{/get}} 
+            <div class="flexed">
+                {{!-- {{#get "pages" filter="page:true+slug:{{slug}}"}} --}}
+                {{#get "pages" filter="page:true+primary_tag:nav-{{slug}}" order="id asc"}}
+                    {{#foreach pages}}
+                    <a class="dropdown-item" href="{{url absolute="true"}}">{{title}}</a>
+                    {{/foreach}}
+                {{/get}} 
+            </div>
         </div>
         {{/unless}}
     </li>
@@ -57,6 +77,8 @@
 <script>
 
     $(document).ready(function () {
+        $(".nav-inicio a").html('<span class="glyphicon glyphicon-home"></span>');
+        /*
         var $li=$(".nav li.dropdown");
         $li.each(function(){
             var $slug_li=$(this).find("a.dropdown-toggle").attr('href');
@@ -82,7 +104,7 @@
                
             }
             $postcontent.remove();
-        });
+        });*/
         $(".dropdown").hover(function(){
             $(this).find(".dropdown-toggle").addClass("active");
             $as=$(this).find("a.dropdown-item");
