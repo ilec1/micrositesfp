@@ -1,17 +1,11 @@
 version: '3.1'
 
 services:
-
   ghost:
-    image: ghost:2-alpine
+    build: .
+    env_file:
+      - .env
     ports:
-      - 5000:2368
-    environment:
-      # see https://docs.ghost.org/docs/config#section-running-ghost-with-config-env-variables
-      database__client: mysql
-      database__connection__host: localhost
-      database__connection__user: ${MYSQL_USER}
-      database__connection__password: ${MYSQL_PASSWORD}
-      database__connection__database: ghost_transparencia
+      - 5000:5000
     volumes:
       - ./content:/var/lib/ghost/content
