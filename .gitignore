@@ -4,3 +4,5 @@ versions/
 .ghost-cli
 .ghostpid
 content/logs/
+docker-compose.override.yml
+.env
