@@ -2355,3 +2355,57 @@ Usage (In Ghost editor):
         margin-left: 0;
     }
 }
+.mbr-arrow-up {
+    display: none;
+    bottom: 25px;
+    right: 90px;
+    position: fixed;
+    text-align: right;
+    z-index: 5000;
+    color: #ffffff;
+    font-size: 32px;
+    transform: rotate(180deg);
+    -webkit-transform: rotate(180deg);
+}
+.mbr-arrow-up a {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 3px;
+    color: #fff;
+    display: inline-block;
+    height: 40px;
+    width: 40px;
+    outline-style: none !important;
+    position: relative;
+    text-decoration: none;
+    transition: all .3s ease-in-out;
+    cursor: pointer;
+    text-align: center;
+}
+.mbr-arrow-up a:hover {
+    background-color: rgba(0, 0, 0, 0.4);
+}
+.mbr-arrow-up a i {
+    line-height: 60px;
+}
+
+#scrollToTop a i:before {
+    content: '';
+    position: absolute;
+    height: 40%;
+    top: 25%;
+    background: #fff;
+    width: 2px;
+    left: calc(50% - 1px);
+}
+#scrollToTop a i:after {
+    content: '';
+    position: absolute;
+    display: block;
+    border-top: 2px solid #fff;
+    border-right: 2px solid #fff;
+    width: 40%;
+    height: 40%;
+    left: 30%;
+    bottom: 30%;
+    transform: rotate(135deg);
+}

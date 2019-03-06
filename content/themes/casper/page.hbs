@@ -124,12 +124,11 @@ PAGE
         if($(".left-side-bar").find("a").length==0){
             $(".left-side-bar").hide();
         }
-        else{
+      /*   else{
             var url= window.location.href; 
             var url_split=url.split('/');
-            console.log($(".left-side-bar").find('a[href="'+url_split[url_split.length-2]+'"]'));
         }
-        /*    $postContent.find("h2").each(function (index, el) {
+           $postContent.find("h2").each(function (index, el) {
                 $("<a href='#" + el.id + "'>" + el.innerHTML + "</a>").appendTo(".left-side-bar");
             });  
             var footer = $("footer").offset().top;
@@ -146,7 +145,14 @@ PAGE
             var id=$(this).attr('href');
             $('html,body').animate({scrollTop: $("h2"+id).offset().top},'slow');    
         });*/
-       
+        //var footer = $("footer").offset().top;
+        var hb=$("#site-main").height();
+        $(window).scroll(function (event) {
+                if ($(window).scrollTop() >= hb){
+                    $(".left-side-bar").hide();}
+                else
+                    $(".left-side-bar").show();
+        });
         
     });
 </script>

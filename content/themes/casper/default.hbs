@@ -59,7 +59,7 @@
         </footer>
 
     </div>
-
+<div id="scrollToTop" class="scrollToTop mbr-arrow-up"><a style="text-align: center;"><i></i></a></div>
     {{!-- The big email subscribe modal content --}}
     {{#if @labs.subscribers}}
     <div id="subscribe" class="subscribe-overlay">
@@ -105,6 +105,22 @@
     {{ghost_foot}}
 
     <script src="https://framework-gb.cdn.gob.mx/gobmx.js"></script>
+
+    <script>
+    $(document).ready(function(){
+        var ws=window.innerHeight;
+        $(window).scroll(function (event) {
+            if ($(window).scrollTop()  > ws)
+                $("#scrollToTop").show();
+            else
+                $("#scrollToTop").hide();
+        });
+        $("#scrollToTop").click(function(){
+            $(window).scrollTop(0);
+        });
+        
+    });
+</script>
     
 
 </body>
