@@ -120,7 +120,7 @@
                         if(mayor < $(this).width())
                         mayor=$(this).width();   
                     });
-                    $(this).find(".dropdown-menu").width(($as.length/3 * mayor));
+                    $(this).find(".dropdown-menu").width(($as.length/3 * mayor)+10);
                 }
             },function(){
                 $(this).find(".dropdown-toggle").removeClass("active");
