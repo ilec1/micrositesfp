@@ -2320,6 +2320,12 @@ Usage (In Ghost editor):
     display: flex;
     width: 60%;
 }
+.copyright{
+    width: 40%;
+}
+.copyright p{
+    margin-top: 10px;
+}
 
 .site-footer-nav a {
     position: relative;
@@ -2348,7 +2354,7 @@ Usage (In Ghost editor):
        /* flex-direction: column;*/
        display: block;
     }
-    .site-footer-nav{
+    .site-footer-nav, .copyright{
         width: 100%;
     }
     .site-footer-nav a{

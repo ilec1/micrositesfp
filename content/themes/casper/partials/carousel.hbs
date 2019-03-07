@@ -59,7 +59,7 @@
     {{#get "posts" limit="5" include="tags" filter="featured:true" order="published_at desc"}}
     {{#foreach posts}}
     <div class="item {{#if @first}}active{{/if}}"
-      style="background:linear-gradient(to right,rgba(0,0,0,0.65) 0%, rgba(0,0,0,0) 50%), url('{{feature_image}}') #cf913e 50% 50% no-repeat;background-size: cover">
+      style="background:linear-gradient(to right,rgba(0,0,0,0.65) 0%, rgba(0,0,0,0) 50%), url('{{img_url feature_image}}') #cf913e 50% 50% no-repeat;background-size: cover">
       {{!-- <img src="{{feature_image}}" alt="{{title}}" height="330px"> --}}
       <div class="container">
         <div class="carousel-caption">
