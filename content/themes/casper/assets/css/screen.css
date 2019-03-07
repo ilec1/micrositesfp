@@ -49,7 +49,12 @@ body {
     position: absolute;
     text-indent: -9999px;
 }
-
+.d-block{
+    display: block;
+}
+.f-left{
+    float:left;
+}
 /* 2. Layout - Page building blocks
 /* ---------------------------------------------------------- */
 
@@ -1058,7 +1063,7 @@ Usage (In Ghost editor):
 }
 
 .post-full-content h2 {
-    margin: 0.5em 0 0.2em 0;
+    margin: 0.1em 0;
     font-size: 3.6rem;
     font-weight: 700;
 }
@@ -1070,7 +1075,7 @@ Usage (In Ghost editor):
 }
 
 .post-full-content h3 {
-    margin: 0.5em 0 0.2em 0;
+    margin: 0.5em 0;
     font-size: 2.8rem;
     font-weight: 700;
 }
@@ -2318,10 +2323,10 @@ Usage (In Ghost editor):
 
 .site-footer-nav {
     display: flex;
-    width: 60%;
+    width: 50%;
 }
 .copyright{
-    width: 40%;
+    width: 30%;
 }
 .copyright p{
     margin-top: 10px;
@@ -2349,13 +2354,16 @@ Usage (In Ghost editor):
     display: none;
 }
 
-@media (max-width: 650px) {
+@media (max-width: 767px) {
     .site-footer-content {
        /* flex-direction: column;*/
        display: block;
     }
     .site-footer-nav, .copyright{
         width: 100%;
+    }
+    .copyright p{
+        text-align: center;
     }
     .site-footer-nav a{
         margin-left: 0;

@@ -20,7 +20,7 @@
             top: 45px;
             z-index: 20000;
             overflow: hidden;
-            height: auto;
+            height: 45px;
         }
 
         #navbarMainCollapse {
@@ -53,7 +53,6 @@
         }
 
         @media (max-width:768px) {
-
             .site-nav-left,
             #navbarMain {
                 display: block;
@@ -64,15 +63,13 @@
             }
              .collapse {
             display: none;
-        }
+            }
 
-        .collapse.in {
-            display: block;
+            .site-nav.collapse.in {
+                display: block;
+                background-color: transparent;
+            }
         }
-        }
-.site-nav .nav.collapse.show{
-    margin-left: 0;
-}
         .site-nav.long {
             height: auto;
         }

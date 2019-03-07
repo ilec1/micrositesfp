@@ -14,11 +14,12 @@ into the {body} of the default.hbs template --}}
         margin-left: 25%;
         width: 75%;
     }
+    .post-full.full-width {
+        margin: 0 auto;
+        width: 100%;
+    }
     .post-content p{
         text-align: justify;
-    }
-    .post-full-content h2:not(:first-child){
-        padding-top: 140px;
     }
     .left-side-bar {
         width: 20%;
@@ -55,37 +56,81 @@ into the {body} of the default.hbs template --}}
         border-left: solid #9d2449 5px;
         padding-left: 10px;
     }
+    .tag-proyectos .ptitle{   
+        font-weight: bold;
+        text-align: left;
+    }
+    .tag-proyectos .ptitle a{
+        color: #fff;
+        box-shadow: inset 0 -1px 0 #fff;
+    }
+    .inner.tag-proyectos{
+        max-width: 100%;
+    }
+    .tag-proyectos .post-full-header {
+        max-width: 100%;
+        min-height: 400px;
+    }
+    .tag-proyectos .post-full-content{
+        margin: 0 auto;
+        background: none;
+    }
+    .tag-proyectos .post-full-header .post-full-content h1 {
+        color: #fff;
+        width: 50%;
+        float: left;
+        min-width: 0;
+    }
+    .tag-proyectos .post-full-header .post-full-content .proyecto-side-bar{
+         width: 30%;
+        float: right;
+    }
+
+    .tag-proyectos .post-full-content:after,.tag-proyectos .post-full-content:before{
+        background: none;
+    }
+     .yellow{
+        color: #cf913e;
+        font-size: 5rem;
+    }
+    .post-full .post-full-content .proyecto-side-bar a {
+        text-transform: uppercase;
+        box-shadow: none;
+        color: #fff;
+        display: block;
+        text-decoration: underline;
+        text-align: left;
+    }
+    .post-full .post-full-content .proyecto-side-bar a:hover{
+        text-decoration: none;
+    }
     @media (max-width: 767px) {
-        .post-full{
+        .post-full,.tag-proyectos .post-full-header .post-full-content h1 {
             width: 100%;
             margin: 0 auto;
         }
-        .left-side-bar{
+        .left-side-bar,.tag-proyectos .post-full-header .post-full-content .proyecto-side-bar{
             display: none !important;
         }
-        .post-full-content h2:not(:first-child){
-            padding-top: 0;
-        }
+        
     }
 </style>
 {{> "site-nav"}}
 {{!-- Everything inside the #post tags pulls data from the post --}}
-PAGE
+
 {{#post}}
 
 <main id="site-main" class="site-main">
-    <div class="inner">
-        <aside class="left-side-bar" id="left-side-bar">
-        {{#get "pages" filter="page:true+tags:{{primary_tag.slug}}" order="id asc"}}
-            {{#foreach pages}}
-            <a href="{{url}}" {{#has slug="{{post.slug}}"}}{{/has}}>{{title}}</a>
-            {{/foreach}}
-        {{/get}}
-        {{!-- {{#has slug="sfp"}}
-        <a href="{{@site.url}}/directorio">Directorio</a>
-        {{/has}} --}}
-        </aside>
-        <article class="post-full {{post_class}} {{#unless feature_image}}no-image{{/unless}}">
+    <div class="inner {{post_class}}">
+        {{^has tag="proyectos"}}
+            <aside class="left-side-bar" id="left-side-bar">
+                {{#get "pages" filter="page:true+tags:{{primary_tag.slug}}" order="id asc"}}
+                    {{#foreach pages}}
+                    <a href="{{url}}" {{#has slug="{{post.slug}}"}}{{/has}}>{{title}}</a>
+                    {{/foreach}}
+                {{/get}}
+            </aside>
+        <article class="post-full {{#unless feature_image}}no-image{{/unless}}">
             {{#if feature_image}}
             <figure class="post-full-image">
                 {{!-- This is a responsive image, it loads different sizes depending on device
@@ -98,7 +143,7 @@ PAGE
                             1400px" src="{{img_url feature_image size="xl"}}" alt="{{title}}" />
             </figure>
             {{/if}}
-            <section class="post-full-content"> 
+          <section class="post-full-content"> 
                 <header class="post-full-header">
                     <h1 class="post-full-title text-left">{{title}}</h1>
                 </header>
@@ -106,10 +151,33 @@ PAGE
                     {{content}}
                 </div>
             </section>
-
+        {{else}} 
+        {{!-- Si es un proyecto --}}
+         <article class="post-full {{post_class}} {{#unless feature_image}}no-image{{/unless}}">
+            <header class="post-full-header" {{#if feature_image}}style="background:linear-gradient(to right,rgba(0,0,0,0.65) 0%, rgba(0,0,0,0) 50%), url('{{img_url feature_image}}') #cf913e 50% 50% no-repeat;background-size: cover"{{/if}}>
+                <section class="post-full-content"> 
+                    <h3 class="ptitle"><a href="{{@site_url}}/proyectos/">25 Proyectos</a></h3>
+                    <h1 class="post-full-title text-left">{{title}}</h1>
+                    <div class="proyecto-side-bar"></div>
+                </section>
+            </header>
+            
+            <section class="post-full-content"> 
+                <div class="post-content">
+                    {{content}}
+                </div>
+            </section>
+            <section class="post-full-content"> 
+                <h4>Ver más proyectos</h4>
+                {{#get "pages" filter="page:true+tags:proyectos+id:-{{id}}" order="published_at desc" limit=3}}
+                    {{#foreach pages}}
+                    <a href="{{url}}" class="f-left">{{title}}</a>
+                    {{/foreach}}
+                {{/get}}
+            </section>
+        {{/has}}
+        {{!-- FIN Si es un proyecto --}}
         </article>
-
-
     </div>
 </main>
 
@@ -119,40 +187,45 @@ PAGE
 {{#contentFor "scripts"}}
 <script>
     $(document).ready(function () {
-        var $postContent = $(".post-full-content");
+        var $postContent = $(".post-full>.post-full-content");   
         $postContent.fitVids();
+        $(".post-full-header .post-full-content h1").html(function(){
+            var text= $(this).text().trim().split(" ");
+            var first = text.shift();
+            return (text.length > 0 ? "<span class='yellow'>"+ first + "</span> " : first) + text.join(" ");
+        }); 
         if($(".left-side-bar").find("a").length==0){
             $(".left-side-bar").hide();
+            $(".post-full").addClass("full-width");
+          //  $(".post-full-title").removeClass("text-left").addClass("text-center");
         }
-      /*   else{
-            var url= window.location.href; 
-            var url_split=url.split('/');
+        if($postContent.find("h2").length==0){
+            $(".proyecto-side-bar").hide();
         }
-           $postContent.find("h2").each(function (index, el) {
-                $("<a href='#" + el.id + "'>" + el.innerHTML + "</a>").appendTo(".left-side-bar");
+        else{
+            $postContent.find("h2").each(function (index, el) {
+                $("<a href='#" + el.id + "'>" + el.innerHTML + "</a>").appendTo(".proyecto-side-bar");
             });  
-            var footer = $("footer").offset().top;
-            $(window).scroll(function (event) {
-                if ($(window).scrollTop() >= footer-500)
-                    $(".left-side-bar").hide('slow');
-                else
-                    $(".left-side-bar").show('slow');
-            });
-            $('body').scrollspy({ target: '#left-side-bar' })
         }
+  
+
          
         /*$(".left-side-bar a").click(function(){
             var id=$(this).attr('href');
             $('html,body').animate({scrollTop: $("h2"+id).offset().top},'slow');    
         });*/
-        //var footer = $("footer").offset().top;
-        var hb=$("#site-main").height();
-        $(window).scroll(function (event) {
-                if ($(window).scrollTop() >= hb){
-                    $(".left-side-bar").hide();}
-                else
-                    $(".left-side-bar").show();
-        });
+        if($(".left-side-bar").find("a").length>0){
+            var hb=$("#site-main").height();
+            $(window).scroll(function (event) {
+                    if ($(window).scrollTop() >= hb){
+                        $(".left-side-bar").hide();}
+                    else
+                        $(".left-side-bar").show();
+            });
+        }
+        if($(".inner").hasClass("tag-proyectos")){
+            $(".nav-25-proyectos").addClass("nav-current");
+        }
         
     });
 </script>
