@@ -1,6 +1,7 @@
 routes:
   /proyectos/: proyectos
   /actividades/: actividades
+  /contacto/: contacto
 collections:
   /:
     permalink: /{slug}/

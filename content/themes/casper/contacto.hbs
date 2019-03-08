@@ -1,0 +1,79 @@
+{{!< default}}
+{{!-- The tag above means: insert everything in this file
+into the {body} of the default.hbs template --}}
+
+{{!-- The big featured header, it uses blog cover image as a BG if available --}}
+{{!-- <header class="site-header outer">
+    <div class="inner">
+        {{> "site-nav"}}
+    </div>
+</header> --}}
+
+{{> "site-nav"}}
+{{!-- Everything inside the #post tags pulls data from the post --}}
+<style>
+    .inner {
+        padding: 20px 0;
+    }
+</style>
+
+<main id="site-main" class="site-main">
+    <div class="inner row">
+       <div class="col-md-6">
+           <h2>Ubicación</h2>
+<p>Av. Barranca del Muerto 209, pisos 9 y 10, Colonia San José Insurgentes, Delegación Benito Juárez, Ciudad de México, C.P. 03900. Recepción de documentación en PB del mismo edificio. </p>
+<p>Horario de atención: 9:00 a 15:00 horas y de 17:00 a 19:00 horas.</p>
+       </div>
+       <div class="col-md-6">
+           <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3764.1640651101698!2d-99.18575768578272!3d19.362047447951642!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d1ff8c972c8053%3A0xc4116f596b803bd0!2sBarranca+del+Muerto+209%2C+San+Jos%C3%A9+Insurgentes%2C+03900+Ciudad+de+M%C3%A9xico%2C+CDMX!5e0!3m2!1sen!2smx!4v1551290830965" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
+       </div>
+    </div>
+</main>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+{{!-- The #contentFor helper here will send everything inside it up to the matching #block helper found in default.hbs --}}
+{{#contentFor "scripts"}}
+<script>
+    $(document).ready(function () {
+        var $postContent = $(".post-full>.post-full-content");   
+        $postContent.fitVids();
+        $(".post-full-header .post-full-content h1").html(function(){
+            var text= $(this).text().trim().split(" ");
+            var first = text.shift();
+            return (text.length > 0 ? "<span class='yellow'>"+ first + "</span> " : first) + text.join(" ");
+        }); 
+        if($(".left-side-bar").find("a").length==0){
+            $(".left-side-bar").hide();
+            $(".post-full").addClass("full-width");
+          //  $(".post-full-title").removeClass("text-left").addClass("text-center");
+        }
+        if($postContent.find("h2").length==0){
+            $(".proyecto-side-bar").hide();
+        }
+        else{
+            $postContent.find("h2").each(function (index, el) {
+                $("<a href='#" + el.id + "'>" + el.innerHTML + "</a>").appendTo(".proyecto-side-bar");
+            });  
+        }
+  
+
+         
+        /*$(".left-side-bar a").click(function(){
+            var id=$(this).attr('href');
+            $('html,body').animate({scrollTop: $("h2"+id).offset().top},'slow');    
+        });*/
+        if($(".left-side-bar").find("a").length>0){
+            var hb=$("#site-main").height();
+            $(window).scroll(function (event) {
+                    if ($(window).scrollTop() >= hb){
+                        $(".left-side-bar").hide();}
+                    else
+                        $(".left-side-bar").show();
+            });
+        }
+        if($(".inner").hasClass("tag-proyectos")){
+            $(".nav-25-proyectos").addClass("nav-current");
+        }
+        
+    });
+</script>
+{{/contentFor}}
