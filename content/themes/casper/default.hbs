@@ -17,7 +17,7 @@
     <link href="https://framework-gb.cdn.gob.mx/assets/styles/main.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700|Roboto:400,700" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="{{asset "built/screen.css"}}" />
-    {{!-- <link rel="icon" href="https://framework-gb.cdn.gob.mx/favicon.ico"> --}}
+    <link rel="icon" href="{{@site.url}}/content/images/favicon-sfp.png">
     {{!-- This tag outputs SEO meta+structured data and other important settings --}}
     {{ghost_head}}
 
@@ -33,7 +33,7 @@
         {{!-- The footer at the very bottom of the screen --}}
         <footer class="site-footer outer">
             <div class="site-footer-content">
-                <section class="copyright"><a href="{{@site.url}}"><img src="{{@site.url}}/content/images/2019/02/SFP_logoblanco_horizontal.png" alt="{{@site.title}}" /></a> 
+                <section class="copyright"><a href="{{@site.url}}"><img src="{{@site.url}}/content/images/SFP_logoblanco_horizontal.png" alt="{{@site.title}}" /></a> 
                 <p>Todos los derechos reservados &copy; {{date format="YYYY"}}</p>
                 </section>
                 <nav class="site-footer-nav">
@@ -67,7 +67,7 @@
         <a class="subscribe-overlay-close" href="#"></a>
         <div class="subscribe-overlay-content">
             {{#if @site.logo}}
-            <img class="subscribe-overlay-logo" src="{{@site.logo}}" alt="{{@site.title}}" />
+            <img class="subscribe-overlay-logo" src="{{@site.url}}/content/images/logo_sfp.png" alt="{{@site.title}}" />
             {{/if}}
             <h1 class="subscribe-overlay-title">Subscribe to {{@site.title}}</h1>
             <p class="subscribe-overlay-description">Stay up to date! Get all the latest &amp; greatest posts delivered
