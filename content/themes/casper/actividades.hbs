@@ -16,8 +16,17 @@
 <main id="site-main" class="site-main outer">
     <div class="inner">
         <h1 class="heading">Actividades</h1>
+        <h2>Últimas noticias</h2>
         <div class="post-feed actividades">
-            {{#get "posts" filter="tags:[noticias, comunicados,actividades]" order="published_at desc"}}
+            {{#get "posts" filter="tags:noticias" order="published_at desc" limit=3}}
+            {{#foreach posts}}
+            {{> "post-card"}}
+            {{/foreach}}
+            {{/get}}
+        </div>
+        <h2>Comunicados</h2>
+        <div class="post-feed comunicados">
+            {{#get "posts" filter="tags:comunicados" order="published_at desc" limit=3}}
             {{#foreach posts}}
             {{> "post-card"}}
             {{/foreach}}
