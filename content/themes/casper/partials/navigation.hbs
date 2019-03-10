@@ -49,6 +49,9 @@
                 .site-nav .nav li a {
                     color:#fff;
                 }
+                .site-nav .nav li.nav-current a{
+                     color:#333;
+                }
                 .site-nav .nav li a:hover {
                     color:#333;
                 }
@@ -123,8 +126,11 @@
                     $(this).find(".dropdown-menu").width(($as.length/3 * mayor)+10);
                 }
             },function(){
-                $(this).find(".dropdown-toggle").removeClass("active");
-                $(this).find(".dropdown-menu").hide('slow');
+                var el =$(this);
+                window.setTimeout(function(){
+                    el.find(".dropdown-toggle").removeClass("active");
+                    el.find(".dropdown-menu").hide('slow');      
+                }, 200);          
             });
         }
         

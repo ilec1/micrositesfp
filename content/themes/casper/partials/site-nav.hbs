@@ -20,7 +20,7 @@
             top: 45px;
             z-index: 20000;
             overflow: hidden;
-            height: 45px;
+            height: auto;
         }
 
         #navbarMainCollapse {
@@ -56,13 +56,21 @@
             .site-nav-left,
             #navbarMain {
                 display: block;
+                background:#9D2449;
+                padding: 10px;
             }
 
             .site-name {
-                height: 56px;
+               height: 56px;
+                position: fixed;
+                top: 45px;
+                width: 100%;
+                margin-top: 0;
+                z-index: 30000000;
+                background:#9D2449;
             }
              .collapse {
-            display: none;
+               display: none;
             }
 
             .site-nav.collapse.in {

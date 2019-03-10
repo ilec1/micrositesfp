@@ -68,6 +68,11 @@ body {
     z-index: 100;
     flex-grow: 1;
 }
+@media (max-width: 767px) {
+    .site-main {
+    margin-top: 102px;
+    }
+}
 
 /* Full width page blocks */
 .outer {
@@ -79,8 +84,6 @@ body {
 .inner {
     padding-top: 0;
     margin: 0 auto 50px;
-    max-width: 1100px;
-    width: 100%;
 }
 
 /* Usage:
@@ -808,7 +811,6 @@ make sure this only happens on large viewports / desktop-ish devices.
     font-size: 2.2rem;
     line-height: 1.6em;
     background: #fff;
-    width: 90%
 }
 
 @media (max-width: 1170px) {
@@ -2312,30 +2314,34 @@ Usage (In Ghost editor):
     color:#fff;
     font-size: 1.3rem;
 }
-
-.site-footer-content a {
+.site-footer-nav {
+    display: flex;
+   
+}
+.site-footer-nav a {
     color:#fff;
+    position: relative;
+    margin-left: 20px;
+    display: block;
+    font-size: 18px;
+    font-family: 'Roboto', sans-serif;
 }
 
-.site-footer-content a:hover {
+.site-footer-nav a:hover {
     color: rgba(255, 255, 255, 1);
 }
 
-.site-footer-nav {
-    display: flex;
-    width: 50%;
-}
 .copyright{
     width: 30%;
+    margin-right: 10%;
+    float: left;
 }
 .copyright p{
     margin-top: 10px;
 }
-
-.site-footer-nav a {
-    position: relative;
-    margin-left: 20px;
-    display: block;
+.icon-social{
+    width: 18px;
+    height: 18px;
 }
 
 /*.site-footer-nav a:before {
@@ -2348,11 +2354,11 @@ Usage (In Ghost editor):
     height: 2px;
     background: #fff;
     border-radius: 100%;
-}*/
+}
 
 .site-footer-nav a:first-of-type:before {
     display: none;
-}
+}*/
 
 @media (max-width: 767px) {
     .site-footer-content {
