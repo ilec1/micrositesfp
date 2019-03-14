@@ -21,23 +21,7 @@ into the {body} of the default.hbs template --}}
     .post-content p{
         text-align: justify;
     }
-    .left-side-bar {
-        width: 15%;
-        position: fixed;
-        z-index: 100000;
-        -webkit-transition: ease 1s;
-        transition: ease 1s;
-        display: block;
-    }
-
-    .left-side-bar a:active {
-        font-weight: bold;
-    }
-
-    .left-side-bar.not-sticky {
-        position: relative;
-    }
-
+  
     .post-full-image {
         margin: 10px 0;
         border-radius: 0;
@@ -45,17 +29,35 @@ into the {body} of the default.hbs template --}}
     body{
         position: relative;
     }
-    
-    .left-side-bar a{
+      .left-side-bar {
+        max-width: 260px;
+        position: fixed;
+        z-index: 100000;
+        -webkit-transition: ease 1s;
+        transition: ease 1s;
         display: block;
-        font-weight: bold;
-        margin: 15px 0;
-        width: 100%;
+        margin-top: 20px;
+    }
+    .left-side-bar a{
+        color:#3c484e;
+        display: block;
+        font-size: 1.8rem;
+        margin: 20px 0;
         word-wrap: break-word;
+        padding-left: 20px;
     }
     .left-side-bar a.current{
         border-left: solid #9d2449 5px;
-        padding-left: 10px;
+        color:#9d2449;
+        font-weight: bold;
+
+    }
+    .left-side-bar a:active {
+        font-weight: bold;
+    }
+
+    .left-side-bar.not-sticky {
+        position: relative;
     }
     .tag-proyectos .ptitle{   
         font-weight: bold;
@@ -94,6 +96,10 @@ into the {body} of the default.hbs template --}}
         color: #cf913e;
         font-size: 5rem;
     }
+    .tag-proyectos .post-full-content .post-full-title{
+        text-transform: uppercase;
+
+    }
     .post-full .post-full-content .proyecto-side-bar a {
         text-transform: uppercase;
         box-shadow: none;
@@ -104,6 +110,12 @@ into the {body} of the default.hbs template --}}
     }
     .post-full .post-full-content .proyecto-side-bar a:hover{
         text-decoration: none;
+    }
+    .post-feed{
+        margin: 0 auto;
+    }
+    h3{
+        color:#9f2148;
     }
     @media (max-width: 767px) {
         .post-full,.tag-proyectos .post-full-header .post-full-content h1 {
@@ -175,11 +187,13 @@ into the {body} of the default.hbs template --}}
                         {{content}}
                     </div>
                 </section>
-                <section class="post-full-content container"> 
-                    <h4>Ver más proyectos</h4>
+                <section class="container"> 
+                    <h3>Ver más proyectos</h3>
+                </section>
+                <section class="container post-feed"> 
                     {{#get "pages" filter="page:true+tags:proyectos+id:-{{id}}" order="published_at desc" limit=3}}
                         {{#foreach pages}}
-                        <a href="{{url}}" class="f-left">{{title}}</a>
+                        {{> "proyecto_related"}}
                         {{/foreach}}
                     {{/get}}
                 </section>
@@ -198,7 +212,7 @@ into the {body} of the default.hbs template --}}
     $(document).ready(function () {
         var $postContent = $(".post-full>.post-full-content");   
         $postContent.fitVids();
-        $(".post-full-header .post-full-content h1").html(function(){
+        $(".tag-proyectos .post-full-header .post-full-content h1").html(function(){
             var text= $(this).text().trim().split(" ");
             var first = text.shift();
             return (text.length > 0 ? "<span class='yellow'>"+ first + "</span> " : first) + text.join(" ");
@@ -206,7 +220,6 @@ into the {body} of the default.hbs template --}}
         if($(".left-side-bar").find("a").length==0){
             $(".left-side-bar").hide();
             $(".post-full").addClass("full-width");
-          //  $(".post-full-title").removeClass("text-left").addClass("text-center");
         }
         if($postContent.find("h2").length==0){
             $(".proyecto-side-bar").hide();
@@ -231,6 +244,8 @@ into the {body} of the default.hbs template --}}
                     else
                         $(".left-side-bar").show();
             });
+            var url = $(location).attr('pathname');
+            $('a[href="'+url+'"]').addClass("current");           
         }
         if($(".inner").hasClass("tag-proyectos")){
             $(".nav-25-proyectos").addClass("nav-current");

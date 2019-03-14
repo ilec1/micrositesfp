@@ -6,7 +6,7 @@
     --blue: #0055ff;
     --green: #00cd0a;
     --purple: #ad26b4;
-    --yellow: #fecd35;
+    --yellow: #cf913e;
     --red: #e2103a;
     --darkgrey: #15171A;
     --midgrey: #738a94;
@@ -331,8 +331,8 @@ body {
     overflow-x: hidden;
     color: color(var(--midgrey) l(-25%));
     font-family: Montserrat, sans-serif;
-    font-size: 1.5rem;
-    line-height: 1.6em;
+    font-size: 1.6rem;
+    line-height: 1.3em;
     font-weight: 400;
     font-style: normal;
     letter-spacing: 0;
@@ -386,6 +386,7 @@ dl,
 blockquote {
     margin: 0 0 1.5em 0;
     font-family: 'Roboto', sans-serif;
+    font-weight: 300;
 }
 
 ol,
@@ -469,6 +470,7 @@ blockquote cite a {
 a {
     color: color(var(--rouge) l(-5%));
     text-decoration: none;
+    font-weight: 300;
 }
 
 a:hover {
@@ -479,7 +481,9 @@ a:focus,
 a:hover,
 a:active {
     outline: 0;
-    color: (--blue);
+}
+a:active {
+    color: (--rouge);
 }
 
 h1,
@@ -488,7 +492,6 @@ h3,
 h4,
 h5,
 h6 {
-    margin-top: 0;
     line-height: 1.15;
     font-weight: 700;
     text-rendering: optimizeLegibility;
@@ -496,7 +499,7 @@ h6 {
 }
 
 h1 {
-    margin: 0 0 1em 0;
+    margin: .5em 0 1em 0;
     font-size: 4rem;
     font-weight: 700;
 }
@@ -509,7 +512,7 @@ h1 {
 
 h2 {
     margin: 1.5em 0 0.5em 0;
-    font-size: 2rem;
+    font-size: 2.5rem;
     color: var(--rouge);
 }
 

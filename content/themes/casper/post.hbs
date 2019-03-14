@@ -5,54 +5,56 @@ into the {body} of the default.hbs template --}}
 
 {{> "site-nav"}}
 {{!-- Everything inside the #post tags pulls data from the post --}}
+<style>
+    .inner{max-width: 100%;}
+    .post-full.full-width {
+        margin: 0 auto;
+        width: 100%;
+    }
+    .post-full.full-width header{
+        min-height: 300px;
+    }
+    .post-full.full-width header,.post-full.full-width header h1,.post-full.full-width header a{
+        color:#fff;
+    }
+    .post-full.full-width header h1{
+        margin-top: 20px;
+    }
+    
+</style>
 {{#post}}
-<main id="site-main" class="site-main outer">
-    <div class="inner container">
+<main id="site-main" class="site-main">
+    <div class="inner">
 
-        <article class="post-full {{post_class}} {{#unless feature_image}}no-image{{/unless}}">
+        <article class="post-full full-width {{post_class}} {{#unless feature_image}}no-image{{/unless}}">
 
-            <header class="post-full-header">
-                <h1 class="post-full-title">{{title}}</h1>
-                <section class="post-full-meta">
-                    <time class="post-full-meta-date"
+            <header {{#if feature_image}}style="background:linear-gradient(to bottom,rgba(0,0,0,0.7) 10%, rgba(0,0,0,0) 110%), url('{{img_url feature_image}}') #cf913e 50% 50% no-repeat;background-size: cover"{{/if}}>
+                    <section class="container"> 
+                        <h1 class="post-full-title">{{title}}</h1>
+                        <time class="post-full-meta-date"
                         datetime="{{date format="YYYY-MM-DD"}}">{{date format="D MMMM YYYY"}}</time>
 
-                    {{#primary_tag}}
+                    {{#foreach tags}}
                     <span class="date-divider">/</span> <a href="{{url}}">{{name}}</a>
-                    {{/primary_tag}}
-                </section>
+                    {{/foreach}}
+                    </section>
+            </header>           
 
-            </header>
-
-            {{#if feature_image}}
-            {{!-- <figure class="post-full-image"> --}}
-            <figure class="text-center">
-                {{!-- This is a responsive image, it loads different sizes depending on device
-                https://medium.freecodecamp.org/a-guide-to-responsive-images-with-ready-to-use-templates-c400bd65c433 --}}
-                <img srcset="{{img_url feature_image size="s"}} 300w,
-                            {{img_url feature_image size="m"}} 600w,
-                            {{img_url feature_image size="l"}} 1000w,
-                            {{img_url feature_image size="xl"}} 2000w" sizes="(max-width: 800px) 400px,
-                            (max-width: 1170px) 700px,
-                            1400px" src="{{img_url feature_image size="xl"}}" alt="{{title}}" />
-            </figure>
-            {{/if}}
-
-            <section class="post-full-content">
-                <p>{{excerpt}}</p>
+            <section class="post-full-content container">
                 <div class="post-content">
+                    <p>{{excerpt}}</p>
                     {{content}}
                 </div>
             </section>
 
-            {{!-- Email subscribe form at the bottom of the page --}}
+            {{!-- Email subscribe form at the bottom of the page
             {{#if @labs.subscribers}}
             <section class="subscribe-form">
                 <h3 class="subscribe-form-title">Subscribe to {{@site.title}}</h3>
                 <p>Get the latest posts delivered right to your inbox</p>
                 {{subscribe_form placeholder="youremail@example.com"}}
             </section>
-            {{/if}}
+            {{/if}} --}}
 
             {{!-- <footer class="post-full-footer"> --}}
 
@@ -82,37 +84,36 @@ into the {body} of the default.hbs template --}}
 
 {{!-- Links to Previous/Next posts --}}
 
-<aside class="read-next outer">
+<aside class="read-next container">
     <div class="inner">
         <div class="read-next-feed">
             {{#if primary_tag}}
-            {{#get "posts" filter="id:-{{id}}+tags:{{primary_tag.slug}}" limit="3"
-            as |related_posts|}}
+            {{#get "posts" filter="id:-{{id}}+tags:{{primary_tag.slug}}" limit="3" as |related_posts|}}
             {{#if related_posts}}
-            <h2 style="flex: 1 1 100%;">Relacionado</h2>
-            <article class="read-next-card" {{#if ../primary_tag.feature_image}}
-                style="background-image: url({{img_url ../primary_tag.feature_image size="m"}})" {{else}}
-                {{#if @site.cover_image}} style="background-image: url({{img_url @site.cover_image size="m"}})" {{/if}}
-                {{/if}}>
-                <header class="read-next-card-header">
-                    <small class="read-next-card-header-sitetitle">&mdash; {{@site.title}} &mdash;</small>
-                    {{#../primary_tag}}
-                    <h3 class="read-next-card-header-title"><a href="{{url}}">{{name}}</a></h3>
-                    {{/../primary_tag}}
-                </header>
-                <div class="read-next-divider">{{> "icons/infinity"}}</div>
-                <div class="read-next-card-content">
-                    <ul>
-                        {{#foreach related_posts}}
-                        <li><a href="{{url}}">{{title}}</a></li>
-                        {{/foreach}}
-                    </ul>
-                </div>
-                <footer class="read-next-card-footer">
-                    <a href="{{#../primary_tag}}{{url}}{{/../primary_tag}}">{{plural meta.pagination.total empty='0 publicaciones' singular='% publicación' plural='Ver todas las % publicaciones'}}
-                        →</a>
-                </footer>
-            </article>
+                <h2 style="flex: 1 1 100%;">Relacionado</h2>
+                <article class="read-next-card" {{#if ../primary_tag.feature_image}}
+                    style="background-image: url({{img_url ../primary_tag.feature_image size="m"}})" {{else}}
+                    {{#if @site.cover_image}} style="background-image: url({{img_url @site.cover_image size="m"}})" {{/if}}
+                    {{/if}}>
+                    <header class="read-next-card-header">
+                        <small class="read-next-card-header-sitetitle">&mdash; {{@site.title}} &mdash;</small>
+                        {{#../primary_tag}}
+                        <h3 class="read-next-card-header-title"><a href="{{url}}">{{name}}</a></h3>
+                        {{/../primary_tag}}
+                    </header>
+                    <div class="read-next-divider">{{> "icons/infinity"}}</div>
+                    <div class="read-next-card-content">
+                        <ul>
+                            {{#foreach related_posts}}
+                            <li><a href="{{url}}">{{title}}</a></li>
+                            {{/foreach}}
+                        </ul>
+                    </div>
+                    <footer class="read-next-card-footer">
+                        <a href="{{#../primary_tag}}{{url}}{{/../primary_tag}}">{{plural meta.pagination.total empty='0 publicaciones' singular='% publicación' plural='Ver todas las % publicaciones'}}
+                            →</a>
+                    </footer>
+                </article>
             {{/if}}
             {{/get}}
             {{/if}}

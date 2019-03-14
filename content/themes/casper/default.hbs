@@ -15,7 +15,7 @@
     {{!-- Styles'n'Scripts --}}
     <link rel="stylesheet" type="text/css" href="{{asset "built/bootstrap.min.css"}}" />
     <link href="https://framework-gb.cdn.gob.mx/assets/styles/main.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700|Roboto:400,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700|Roboto:300,400,700" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="{{asset "built/screen.css"}}" />
     <link rel="icon" href="{{@site.url}}/content/images/favicon-sfp.png">
     {{!-- This tag outputs SEO meta+structured data and other important settings --}}
@@ -44,9 +44,10 @@
                     
                     </div>
                     <div class="col-lg-4 col-xs-12">
-                        <a href="{{@site.url}}/comunicados">Noticias</a>
+                        <a href="{{@site.url}}/tag/noticias">Noticias</a>
+                        <a href="{{@site.url}}/tag/comunicados">Comunicados</a>
                         <a href="{{@site.url}}/cumplimiento-a-la-ley">Cumplimiento a la ley</a>
-                        <a href="{{@site.url}}/transparencia-ciudadana">Preguntas frecuentes</a>
+                        <a href="{{@site.url}}/preguntas-frecuentes">Preguntas frecuentes</a>
                     </div>
                     <div class="col-lg-4 col-xs-12">
                     {{#if @site.facebook}}<a href="{{facebook_url @site.facebook}}" target="_blank"
@@ -125,7 +126,10 @@
         $("#scrollToTop").click(function(){
             $(window).scrollTop(0);
         });
-        
+        $('#carousel-home').carousel();
+        $('#carousel-home').on('slide.bs.carousel', function () {
+            console.log("jnkjn");
+            });
     });
 </script>
     

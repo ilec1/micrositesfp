@@ -15,7 +15,7 @@ into the {body} of the default.hbs template --}}
         <div class="post-feed {{#is "index"}}post-feed-index{{/is}}">
 
             {{!-- {{#get "posts" limit="5" filter="tags:-[bullet-home,proyectos]+featured:false" order="published_at desc"}} --}}
-            {{#get "posts" limit="5" filter="tags:[noticias,comunicados]+featured:false" order="published_at desc"}}
+            {{#get "posts" limit="5" filter="tags:noticias" order="published_at desc"}}
             {{#foreach posts}}
 
             {{!-- The tag below includes the markup for each post - partials/post-card.hbs --}}
@@ -24,8 +24,6 @@ into the {body} of the default.hbs template --}}
             {{/foreach}}
             {{/get}}
         </div>
-
-
-
+        <a class="text-center" href="/tag/noticias/">Ver más noticias</a>
     </div>
 </main>

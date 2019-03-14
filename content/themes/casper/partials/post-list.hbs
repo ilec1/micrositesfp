@@ -1,0 +1,25 @@
+<style>
+    .row{
+        margin-bottom:20px;
+    }
+    h4{
+        margin-top: 0;
+        font-weight: bold;
+    }
+    a{
+        color:#3c484e;
+    }
+</style>
+<div class="row">
+  <div class="col-lg-2">
+        {{#if feature_image}}
+        <a class="post-card-image-link" href="{{url}}">
+            <img class="post-card-image" src="{{img_url feature_image}}" style="max-height:100px" alt="{{title}}" />
+        </a>    
+        {{/if}}
+  </div>
+  <div class="col-lg-10">
+    <a href="{{url}}"><h4>{{title}}</h4></a>
+    <p>{{excerpt words="20"}}</p>
+  </div>
+</div>

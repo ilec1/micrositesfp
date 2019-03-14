@@ -5,9 +5,10 @@
            }*/
            .site-nav .nav li a.dropdown-item {
                 color: white;
+                min-width: 280px;
            }           
            .site-nav .nav li a.dropdown-item:hover {
-                color: #3c484e;
+                text-decoration:underline;
            }           
            .site-nav .nav li .dropdown-menu-large{
             background: #9f2148;
@@ -118,19 +119,19 @@
                 $as=$(this).find("a.dropdown-item");
                 if($as.length > 0){
                     $(this).find(".dropdown-menu").show();
-                    var mayor = 0;
+                    var mayor = 280;
                     $as.each(function(){
                         if(mayor < $(this).width())
                         mayor=$(this).width();   
                     });
-                    $(this).find(".dropdown-menu").width(((($as.length/3)+1) * mayor)+10);
+                    $(this).find(".dropdown-menu").width((Math.ceil($as.length/3) * mayor)+10);
                 }
             },function(){
                 var el =$(this);
                 window.setTimeout(function(){
                     el.find(".dropdown-toggle").removeClass("active");
                     el.find(".dropdown-menu").hide('slow');      
-                }, 200);          
+                }, 100);          
             });
         }
         
