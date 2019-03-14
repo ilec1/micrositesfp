@@ -12,6 +12,7 @@
  }
  h2.heading a{
 font-weight: bold;
+color:#9d2449;
  }
   h3 {
       font-weight: bold;
@@ -24,16 +25,17 @@ font-weight: bold;
 <main id="site-main" class="site-main outer">
     <div class="inner container">
         <h2 class="heading"> <a href="/transparencia/">Transparencia</a> / Actividades</h2>
-        <h3 class="bold">Últimas noticias</h3>
         <div class="actividades">
+            <h3 class="bold">Últimas noticias</h3>
             {{#get "posts" filter="tags:noticias" order="published_at desc" limit=3}}
             {{#foreach posts}}
             {{> "post-list"}}
             {{/foreach}}
             {{/get}}
         </div>
-        <h3>Comunicados recientes</h3>
+        
         <div class="comunicados">
+            <h3>Comunicados recientes</h3>
             {{#get "posts" filter="tags:comunicados" order="published_at desc" limit=3}}
             {{#foreach posts}}
             {{> "post-list"}}
